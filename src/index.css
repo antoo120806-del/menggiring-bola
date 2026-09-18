@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html,
+  body {
+    background-color: #bfe6a8;
+  }
+
+  body {
+    @apply font-hand text-navy antialiased;
+    margin: 0;
+  }
+
+  :focus-visible {
+    outline: 3px solid #12386f;
+    outline-offset: 3px;
+    border-radius: 8px;
+  }
+}
+
+@layer components {
+  /* Sapuan kuas tidak beraturan, dipakai pada banner & kotak intro */
+  .brush {
+    border-radius: 34px 26px 32px 24px / 22px 30px 20px 28px;
+  }
+
+  .brush-sm {
+    border-radius: 18px 14px 20px 12px / 12px 16px 10px 14px;
+  }
+
+  /* Judul dengan garis tepi tebal seperti pada poster */
+  .title-outline {
+    -webkit-text-stroke: 6px #0d2b57;
+    paint-order: stroke fill;
+    letter-spacing: 0.01em;
+  }
+
+  @media (max-width: 640px) {
+    .title-outline {
+      -webkit-text-stroke-width: 4px;
+    }
+  }
+
+  .step-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .step-card:hover,
+  .step-card:focus-within {
+    transform: translateY(-6px);
+    @apply shadow-card-hover;
+  }
+
+  .tip:hover .tip-icon,
+  .tip:focus-visible .tip-icon {
+    transform: scale(1.08) rotate(-4deg);
+  }
+
+  .tip-icon {
+    transition: transform 0.2s ease;
+  }
+
+  .spin-slow {
+    animation: spin-slow 14s linear infinite;
+  }
+
+  /* Pita rumput bergerigi di atas footer */
+  .grass-top {
+    clip-path: polygon(
+      0 40%, 3% 10%, 6% 42%, 10% 6%, 14% 44%, 18% 14%, 22% 40%, 27% 4%,
+      31% 44%, 35% 16%, 40% 40%, 44% 6%, 49% 44%, 53% 14%, 58% 40%, 62% 4%,
+      66% 44%, 71% 16%, 75% 38%, 79% 6%, 84% 44%, 88% 14%, 92% 40%, 96% 8%,
+      100% 42%, 100% 100%, 0 100%
+    );
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spin-slow {
+    animation: none;
+  }
+
+  .step-card,
+  .tip-icon {
+    transition: none;
+  }
+}
